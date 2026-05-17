@@ -8,6 +8,7 @@ client.load(['../../services/grpc-service/Protos'], 'farm_benchmark.proto');
 const GRPC_TARGET = __ENV.GRPC_HOST || __ENV.GRPC_TARGET || 'localhost:5001';
 const successfulRequests = new Counter('successful_requests');
 const requestFailureRate = new Rate('request_failure_rate');
+let connected = false;
 
 export const options = {
   vus: Number(__ENV.VUS || 10),
@@ -24,7 +25,7 @@ export const options = {
 };
 
 export default function () {
-  client.connect(GRPC_TARGET, { plaintext: true });
+  connectOnce();
 
   const response = client.invoke(
     'iotfarmbench.grpc.FarmBenchmarkService/GetSelectiveReadings',
@@ -40,6 +41,16 @@ export default function () {
   successfulRequests.add(ok ? 1 : 0);
   requestFailureRate.add(!ok);
 
-  client.close();
   sleep(1);
+}
+
+export function teardown() {
+  client.close();
+}
+
+function connectOnce() {
+  if (!connected) {
+    client.connect(GRPC_TARGET, { plaintext: true });
+    connected = true;
+  }
 }

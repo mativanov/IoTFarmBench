@@ -1,42 +1,49 @@
 ﻿IoTFarmBench Docker stats
-Started: 2026-05-16T22:18:43.7745749+02:00
+Started: 2026-05-17T17:29:07.0732697+02:00
 DurationSeconds: 40
 IntervalSeconds: 5
 Samples: 8
 Label: graphql-heavy-querying-500vu
 
-Sample 1 - 2026-05-16T22:18:43.8083488+02:00
-NAME                    CPU %     MEM USAGE / LIMIT     MEM %     NET I/O
-iotfarmbench-rest       0.07%     229.4MiB / 3.503GiB   6.40%     85.3MB / 127MB
-iotfarmbench-grpc       0.01%     209.6MiB / 3.503GiB   5.84%     244MB / 191MB
-iotfarmbench-graphql    128.43%   105.5MiB / 3.503GiB   2.94%     18.2MB / 23.4MB
-iotfarmbench-postgres   207.26%   317.3MiB / 3.503GiB   8.85%     97.5MB / 258MB
+Sample 1 - 2026-05-17T17:29:07.1434505+02:00
+NAME                    CPU %      MEM USAGE / LIMIT     MEM %     NET I/O
+iotfarmbench-rest       0.01%      223.1MiB / 3.503GiB   6.22%     105MB / 155MB
+iotfarmbench-grpc       0.01%      169.7MiB / 3.503GiB   4.73%     20.3MB / 19.3MB
+iotfarmbench-graphql    17.86%     117.1MiB / 3.503GiB   3.27%     305MB / 121MB
+iotfarmbench-postgres   1139.95%   428.6MiB / 3.503GiB   11.95%    218MB / 787MB
 
-Sample 2 - 2026-05-16T22:18:51.0933555+02:00
-NAME                    CPU %     MEM USAGE / LIMIT     MEM %     NET I/O
-iotfarmbench-rest       0.03%     229.4MiB / 3.503GiB   6.40%     85.3MB / 127MB
-iotfarmbench-grpc       0.01%     209.6MiB / 3.503GiB   5.84%     244MB / 191MB
-iotfarmbench-graphql    124.93%   106.5MiB / 3.503GiB   2.97%     20.2MB / 26.6MB
-iotfarmbench-postgres   338.43%   318.8MiB / 3.503GiB   8.89%     98.4MB / 259MB
+Sample 2 - 2026-05-17T17:29:14.5036410+02:00
+NAME                    CPU %      MEM USAGE / LIMIT     MEM %     NET I/O
+iotfarmbench-rest       0.01%      223.1MiB / 3.503GiB   6.22%     105MB / 155MB
+iotfarmbench-grpc       3.95%      169.7MiB / 3.503GiB   4.73%     20.3MB / 19.3MB
+iotfarmbench-graphql    21.38%     117.2MiB / 3.503GiB   3.27%     306MB / 121MB
+iotfarmbench-postgres   1238.40%   415.4MiB / 3.503GiB   11.58%    218MB / 787MB
 
-Sample 3 - 2026-05-16T22:18:58.3096090+02:00
-NAME                    CPU %     MEM USAGE / LIMIT     MEM %     NET I/O
-iotfarmbench-rest       0.01%     229.4MiB / 3.503GiB   6.40%     85.3MB / 127MB
-iotfarmbench-grpc       0.02%     209.6MiB / 3.503GiB   5.84%     244MB / 191MB
-iotfarmbench-graphql    125.53%   106.2MiB / 3.503GiB   2.96%     22.1MB / 29.5MB
-iotfarmbench-postgres   369.55%   319.5MiB / 3.503GiB   8.91%     99.5MB / 260MB
+Sample 3 - 2026-05-17T17:29:21.7904301+02:00
+NAME                    CPU %      MEM USAGE / LIMIT     MEM %     NET I/O
+iotfarmbench-rest       0.02%      223.1MiB / 3.503GiB   6.22%     105MB / 155MB
+iotfarmbench-grpc       0.01%      169.6MiB / 3.503GiB   4.73%     20.3MB / 19.3MB
+iotfarmbench-graphql    18.43%     117.4MiB / 3.503GiB   3.27%     306MB / 122MB
+iotfarmbench-postgres   1204.78%   354.2MiB / 3.503GiB   9.87%     219MB / 788MB
 
-Sample 4 - 2026-05-16T22:19:05.5347068+02:00
-NAME                    CPU %     MEM USAGE / LIMIT     MEM %     NET I/O
-iotfarmbench-rest       0.02%     229.4MiB / 3.503GiB   6.40%     85.3MB / 127MB
-iotfarmbench-grpc       0.01%     209.6MiB / 3.503GiB   5.84%     244MB / 191MB
-iotfarmbench-graphql    133.12%   105.4MiB / 3.503GiB   2.94%     23.9MB / 32.2MB
-iotfarmbench-postgres   354.18%   318.6MiB / 3.503GiB   8.88%     100MB / 261MB
+Sample 4 - 2026-05-17T17:29:28.2398533+02:00
+NAME                    CPU %      MEM USAGE / LIMIT     MEM %     NET I/O
+iotfarmbench-rest       0.01%      223.1MiB / 3.503GiB   6.22%     105MB / 155MB
+iotfarmbench-grpc       0.01%      169.6MiB / 3.503GiB   4.73%     20.3MB / 19.3MB
+iotfarmbench-graphql    12.85%     117.1MiB / 3.503GiB   3.27%     307MB / 123MB
+iotfarmbench-postgres   1164.42%   351.9MiB / 3.503GiB   9.81%     219MB / 788MB
 
-Sample 5 - 2026-05-16T22:19:11.9566840+02:00
-NAME                    CPU %     MEM USAGE / LIMIT     MEM %     NET I/O
-iotfarmbench-rest       0.07%     229.4MiB / 3.503GiB   6.40%     85.3MB / 127MB
-iotfarmbench-grpc       0.01%     209.6MiB / 3.503GiB   5.84%     244MB / 191MB
-iotfarmbench-graphql    130.62%   105.6MiB / 3.503GiB   2.94%     25.8MB / 35.2MB
-iotfarmbench-postgres   367.36%   318.2MiB / 3.503GiB   8.87%     101MB / 262MB
+Sample 5 - 2026-05-17T17:29:35.5412211+02:00
+NAME                    CPU %      MEM USAGE / LIMIT     MEM %     NET I/O
+iotfarmbench-rest       0.01%      223.1MiB / 3.503GiB   6.22%     105MB / 155MB
+iotfarmbench-grpc       0.01%      169.6MiB / 3.503GiB   4.73%     20.3MB / 19.3MB
+iotfarmbench-graphql    8.45%      117.2MiB / 3.503GiB   3.27%     307MB / 123MB
+iotfarmbench-postgres   1181.78%   348.9MiB / 3.503GiB   9.73%     219MB / 788MB
+
+Sample 6 - 2026-05-17T17:29:42.8738276+02:00
+NAME                    CPU %      MEM USAGE / LIMIT     MEM %     NET I/O
+iotfarmbench-rest       0.02%      223.1MiB / 3.503GiB   6.22%     105MB / 155MB
+iotfarmbench-grpc       0.01%      169.6MiB / 3.503GiB   4.73%     20.3MB / 19.3MB
+iotfarmbench-graphql    13.94%     117.4MiB / 3.503GiB   3.27%     307MB / 124MB
+iotfarmbench-postgres   1181.22%   344.8MiB / 3.503GiB   9.61%     219MB / 789MB
 

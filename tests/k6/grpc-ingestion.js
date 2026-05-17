@@ -25,9 +25,10 @@ export const options = {
 
 const crops = ['Wheat', 'Corn', 'Rice', 'Soybean', 'Barley'];
 const regions = ['North', 'South', 'East', 'West', 'Central'];
+let connected = false;
 
 export default function () {
-  client.connect(GRPC_TARGET, { plaintext: true });
+  connectOnce();
 
   const payload = {
     sensorId: `k6-grpc-sensor-${__VU}-${__ITER}`,
@@ -57,10 +58,20 @@ export default function () {
   successfulRequests.add(ok ? 1 : 0);
   requestFailureRate.add(!ok);
 
-  client.close();
   sleep(1);
+}
+
+export function teardown() {
+  client.close();
 }
 
 function randomBetween(min, max) {
   return Math.round((min + Math.random() * (max - min)) * 100) / 100;
+}
+
+function connectOnce() {
+  if (!connected) {
+    client.connect(GRPC_TARGET, { plaintext: true });
+    connected = true;
+  }
 }

@@ -44,6 +44,7 @@ services:
       DB_NAME: ${DB_NAME:-iotfarmbench}
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_POOL_MAX: ${DB_POOL_MAX:-30}
     ports:
       - "5000:5000"
     depends_on:
@@ -62,6 +63,7 @@ services:
       DB_NAME: ${DB_NAME:-iotfarmbench}
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_POOL_MAX: ${DB_POOL_MAX:-30}
     ports:
       - "5001:5001"
     depends_on:
@@ -81,6 +83,7 @@ services:
       DB_NAME: ${DB_NAME:-iotfarmbench}
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_POOL_MAX: ${DB_POOL_MAX:-30}
     ports:
       - "5002:5002"
     depends_on:

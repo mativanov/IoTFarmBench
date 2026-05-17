@@ -26,7 +26,14 @@ const summaryQuery = `
       count
       avgTemperatureC
       avgHumidityPercent
+      avgSoilMoisturePercent
+      avgSoilPh
+      avgRainfallMm
+      avgSunlightHours
       avgNdviIndex
+      avgYieldKgPerHectare
+      minTimestamp
+      maxTimestamp
     }
   }
 `;
@@ -38,7 +45,9 @@ const byRegionQuery = `
       count
       avgTemperatureC
       avgHumidityPercent
+      avgSoilMoisturePercent
       avgNdviIndex
+      avgYieldKgPerHectare
     }
   }
 `;
@@ -52,11 +61,35 @@ export default function () {
     tags: { endpoint }
   });
 
+  const body = parseGraphQLResponse(response);
   const ok = check(response, {
-    'analytics query succeeded': (r) => r.status === 200 && !r.json('errors')
+    'analytics query succeeded': (r) =>
+      r.status === 200 &&
+      hasNoGraphQLErrors(body) &&
+      hasExpectedAnalyticsData(body, endpoint)
   });
   successfulRequests.add(ok ? 1 : 0);
   requestFailureRate.add(!ok);
 
   sleep(1);
+}
+
+function parseGraphQLResponse(response) {
+  try {
+    return response.json();
+  } catch {
+    return null;
+  }
+}
+
+function hasNoGraphQLErrors(body) {
+  return Array.isArray(body?.errors) ? body.errors.length === 0 : body?.errors === undefined;
+}
+
+function hasExpectedAnalyticsData(body, endpoint) {
+  if (endpoint === 'analyticsSummary') {
+    return Number.isFinite(body?.data?.analyticsSummary?.count);
+  }
+
+  return Array.isArray(body?.data?.analyticsByRegion);
 }

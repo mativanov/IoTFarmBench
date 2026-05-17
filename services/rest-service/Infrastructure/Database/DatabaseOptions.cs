@@ -7,9 +7,10 @@ public sealed class DatabaseOptions
     public string Database { get; } = Get("DB_NAME", "iotfarmbench");
     public string User { get; } = Get("DB_USER", "postgres");
     public string Password { get; } = Get("DB_PASSWORD", "postgres");
+    public string PoolMax { get; } = Get("DB_POOL_MAX", "30");
 
     public string ConnectionString =>
-        $"Host={Host};Port={Port};Database={Database};Username={User};Password={Password}";
+        $"Host={Host};Port={Port};Database={Database};Username={User};Password={Password};Maximum Pool Size={PoolMax}";
 
     private static string Get(string key, string fallback) =>
         Environment.GetEnvironmentVariable(key) ?? fallback;

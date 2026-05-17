@@ -8,6 +8,8 @@ IoTFarmBench is a university project for comparative analysis of synchronous com
 
 The system is fully containerized with Docker Compose, uses PostgreSQL for storage, imports a Smart Farming CSV dataset, and includes reproducible k6 benchmark workflows for REST, GraphQL, and gRPC.
 
+The latest performance report is intentionally conservative: RPS is reported from successful k6 checks, GraphQL heavy-querying requests the same analytics fields as the other protocols, and gRPC response-size values are labeled as Postman decoded-message sizes rather than raw Protobuf wire sizes.
+
 ## Architecture
 
 ```text
@@ -92,6 +94,8 @@ powershell -ExecutionPolicy Bypass -File tests/run-benchmarks.ps1
 
 For the official university report, response sizes are recorded manually from Postman Console for REST and GraphQL, and from Postman gRPC Console for gRPC. Use `docs/postman-response-size.md` for the exact requests and result table.
 
+The gRPC response-size table is not a Wireshark/raw HTTP/2 frame measurement. It documents what Postman displays after decoding the gRPC response.
+
 Collect Docker CPU/RAM/network stats while benchmarks are running:
 
 ```powershell
@@ -106,6 +110,13 @@ powershell -ExecutionPolicy Bypass -File tests/run-full-evaluation.ps1
 
 Results are stored in `tests/results/`.
 
+Generate presentation charts from the current result files:
+
+```powershell
+python -m pip install matplotlib
+python docs/generate_charts.py
+```
+
 ## Benchmark Scenarios
 
 - Scenario A, High-Frequency Ingestion: clients repeatedly create sensor readings.
@@ -114,9 +125,13 @@ Results are stored in `tests/results/`.
 
 The benchmark suite supports 10, 100, and 500 virtual users.
 
+The services use `DB_POOL_MAX` to cap database connection pools during load tests. This avoids measuring PostgreSQL connection exhaustion instead of protocol behavior.
+
 ## Documentation
 
 - `docs/evaluation-report.md`: section 4 evaluation report for k6, Postman response size, and Docker stats
 - `docs/izvestaj-projekat.md`: opis arhitekture i implementacije projekta
 - `docs/izvestaj-merenja.md`: izvestaj o k6, Postman response-size i Docker stats merenjima
 - `docs/postman-response-size.md`: koraci za rucno merenje velicine odgovora u Postmanu
+- `docs/prezentacija-outline.md`: slide-by-slide outline for the project defense
+- `docs/charts/`: presentation-friendly PNG charts generated from benchmark results

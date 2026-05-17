@@ -58,8 +58,12 @@ export default function () {
     tags: { endpoint: 'createReading' }
   });
 
+  const body = parseGraphQLResponse(response);
   const ok = check(response, {
-    'mutation succeeded': (r) => r.status === 200 && !r.json('errors')
+    'mutation succeeded': (r) =>
+      r.status === 200 &&
+      hasNoGraphQLErrors(body) &&
+      Boolean(body?.data?.createReading?.id)
   });
   successfulRequests.add(ok ? 1 : 0);
   requestFailureRate.add(!ok);
@@ -69,4 +73,16 @@ export default function () {
 
 function randomBetween(min, max) {
   return Math.round((min + Math.random() * (max - min)) * 100) / 100;
+}
+
+function parseGraphQLResponse(response) {
+  try {
+    return response.json();
+  } catch {
+    return null;
+  }
+}
+
+function hasNoGraphQLErrors(body) {
+  return Array.isArray(body?.errors) ? body.errors.length === 0 : body?.errors === undefined;
 }

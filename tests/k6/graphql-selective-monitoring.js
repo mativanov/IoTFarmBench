@@ -35,11 +35,27 @@ export default function () {
     tags: { endpoint: 'readings-selective' }
   });
 
+  const body = parseGraphQLResponse(response);
   const ok = check(response, {
-    'selective query succeeded': (r) => r.status === 200 && !r.json('errors')
+    'selective query succeeded': (r) =>
+      r.status === 200 &&
+      hasNoGraphQLErrors(body) &&
+      Array.isArray(body?.data?.readings)
   });
   successfulRequests.add(ok ? 1 : 0);
   requestFailureRate.add(!ok);
 
   sleep(1);
+}
+
+function parseGraphQLResponse(response) {
+  try {
+    return response.json();
+  } catch {
+    return null;
+  }
+}
+
+function hasNoGraphQLErrors(body) {
+  return Array.isArray(body?.errors) ? body.errors.length === 0 : body?.errors === undefined;
 }

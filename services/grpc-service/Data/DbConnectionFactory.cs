@@ -13,8 +13,10 @@ public sealed class DbConnectionFactory
         var database = Get("DB_NAME", "iotfarmbench");
         var user = Get("DB_USER", "postgres");
         var password = Get("DB_PASSWORD", "postgres");
+        var poolMax = Get("DB_POOL_MAX", "30");
 
-        _connectionString = $"Host={host};Port={port};Database={database};Username={user};Password={password}";
+        _connectionString =
+            $"Host={host};Port={port};Database={database};Username={user};Password={password};Maximum Pool Size={poolMax}";
     }
 
     public async Task<NpgsqlConnection> OpenConnectionAsync(CancellationToken cancellationToken = default)

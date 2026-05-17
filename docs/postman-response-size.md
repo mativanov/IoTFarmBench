@@ -1,6 +1,13 @@
 # Postman response-size merenje
 
-Ovaj fajl je jedini zvanicni postupak za merenje velicine odgovora. Ne koristiti `grpcurl`, PowerShell body-size skripte ili druge aproksimacije za finalni izvestaj.
+Ovaj fajl opisuje zvanicni postupak za merenje velicine odgovora iz tacke 4b specifikacije. Vrednosti iz Postman-a treba tumaciti pazljivo:
+
+- REST i GraphQL: JSON response body / Postman Console prikaz.
+- gRPC: dekodovana response poruka u Postman gRPC okruzenju.
+- gRPC vrednosti nisu niskonivojsko Wireshark merenje sirovih HTTP/2/Protobuf frame-ova.
+
+gRPC veličina prikazana u tabeli predstavlja veličinu dekodovanog odgovora u Postman gRPC okruženju, a ne niskonivojsko Wireshark merenje sirovih HTTP/2/Protobuf frame-ova.
+
 
 ## Priprema
 
@@ -16,7 +23,7 @@ docker compose up --build -d
 docker compose run --rm importer
 ```
 
-3. U Postmanu otvoriti Console pre slanja zahteva i ocitati velicinu odgovora za svaki zahtev.
+3. U Postmanu otvoriti Console pre slanja zahteva i ocitati velicinu odgovora.
 
 ## REST zahtevi
 
@@ -120,7 +127,14 @@ query {
     count
     avgTemperatureC
     avgHumidityPercent
+    avgSoilMoisturePercent
+    avgSoilPh
+    avgRainfallMm
+    avgSunlightHours
     avgNdviIndex
+    avgYieldKgPerHectare
+    minTimestamp
+    maxTimestamp
   }
 }
 ```
@@ -207,16 +221,20 @@ Message:
 
 ## Tabela za finalni izvestaj
 
-Upisati samo vrednosti ocitane iz Postman Console / Postman gRPC Console.
-
-| Protokol | Scenario | Velicina odgovora (B) | Izvor merenja |
+| Protokol | Scenario | Velicina odgovora | Izvor merenja |
 | --- | --- | ---: | --- |
-| REST | A - High-Frequency Ingestion | 463 | Postman Console |
-| REST | B - Selective Monitoring | 4674 | Postman Console |
-| REST | C - Heavy Querying | 402 | Postman Console |
-| GraphQL | A - High-Frequency Ingestion | 205 | Postman Console |
-| GraphQL | B - Selective Monitoring | 4700 | Postman Console |
-| GraphQL | C - Heavy Querying | 156 | Postman Console |
-| gRPC | A - High-Frequency Ingestion | 524 | Postman gRPC Console |
-| gRPC | B - Selective Monitoring | 4674 | Postman gRPC Console payload |
-| gRPC | C - Heavy Querying | 487 | Postman gRPC Console |
+| REST | A - High-Frequency Ingestion | 463 B | Postman Console, JSON body |
+| REST | B - Selective Monitoring | 4674 B | Postman Console, JSON body |
+| REST | C - Heavy Querying | 402 B | Postman Console, JSON body |
+| GraphQL | A - High-Frequency Ingestion | 205 B | Postman Console, JSON body |
+| GraphQL | B - Selective Monitoring | 4700 B | Postman Console, JSON body |
+| GraphQL | C - Heavy Querying | 156 B | Postman Console, JSON body |
+| gRPC | A - High-Frequency Ingestion | 524 B | Postman decoded gRPC message |
+| gRPC | B - Selective Monitoring | oko 20 KB | Postman decoded gRPC message |
+| gRPC | C - Heavy Querying | 487 B | Postman decoded gRPC message |
+
+## Napomena za gRPC selective monitoring
+
+`GetSelectiveReadings` logicki dobija samo trazena polja, ali odgovor je i dalje tipizirana Protobuf poruka (`SelectiveReadingMessage`) u okviru repeated liste. Postman gRPC prikazuje dekodovanu reprezentaciju poruke. Zbog toga prikaz moze biti znatno veci od ocekivanog raw binarnog payload-a, posebno ako alat prikazuje strukturu i proto3 default vrednosti.
+
+U odbrani projekta ne treba reci da je ova vrednost "binarna Protobuf velicina". Ispravno je reci da je to Postman decoded gRPC response size.
