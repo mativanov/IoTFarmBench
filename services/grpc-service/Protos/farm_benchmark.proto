@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+option csharp_namespace = "IoTFarmBench.GrpcService.Protos";
+
+package iotfarmbench.grpc;
+
+service FarmBenchmarkService {
+  rpc GetDevices(GetDevicesRequest) returns (GetDevicesResponse);
+  rpc GetDeviceById(GetDeviceByIdRequest) returns (DeviceMessage);
+
+  rpc GetReadings(GetReadingsRequest) returns (GetReadingsResponse);
+  rpc GetReadingById(GetReadingByIdRequest) returns (SensorReadingMessage);
+  rpc CreateReading(CreateSensorReadingRequest) returns (SensorReadingMessage);
+
+  rpc GetSelectiveReadings(GetSelectiveReadingsRequest) returns (GetSelectiveReadingsResponse);
+
+  rpc GetAnalyticsSummary(GetAnalyticsSummaryRequest) returns (AnalyticsSummaryMessage);
+  rpc GetAnalyticsByRegion(GetAnalyticsByRegionRequest) returns (GetAnalyticsByRegionResponse);
+}
+
+message GetDevicesRequest {}
+
+message GetDevicesResponse {
+  repeated DeviceMessage devices = 1;
+}
+
+message GetDeviceByIdRequest {
+  string id = 1;
+}
+
+message DeviceMessage {
+  string id = 1;
+  string sensor_id = 2;
+  string farm_id = 3;
+  string region = 4;
+  double latitude = 5;
+  double longitude = 6;
+}
+
+message GetReadingsRequest {
+  string device_id = 1;
+  string from = 2;
+  string to = 3;
+  int32 limit = 4;
+}
+
+message GetReadingsResponse {
+  repeated SensorReadingMessage readings = 1;
+}
+
+message GetReadingByIdRequest {
+  string id = 1;
+}
+
+message SensorReadingMessage {
+  string id = 1;
+  string device_id = 2;
+  string timestamp = 3;
+  string crop_type = 4;
+  double soil_moisture_percent = 5;
+  double soil_ph = 6;
+  double temperature_c = 7;
+  double rainfall_mm = 8;
+  double humidity_percent = 9;
+  double sunlight_hours = 10;
+  string irrigation_type = 11;
+  string fertilizer_type = 12;
+  double pesticide_usage_ml = 13;
+  string sowing_date = 14;
+  string harvest_date = 15;
+  int32 total_days = 16;
+  double yield_kg_per_hectare = 17;
+  double ndvi_index = 18;
+  string crop_disease_status = 19;
+}
+
+message CreateSensorReadingRequest {
+  string sensor_id = 1;
+  string farm_id = 2;
+  string region = 3;
+  double latitude = 4;
+  double longitude = 5;
+  string timestamp = 6;
+  string crop_type = 7;
+  double soil_moisture_percent = 8;
+  double soil_ph = 9;
+  double temperature_c = 10;
+  double rainfall_mm = 11;
+  double humidity_percent = 12;
+  double sunlight_hours = 13;
+  string irrigation_type = 14;
+  string fertilizer_type = 15;
+  double pesticide_usage_ml = 16;
+  string sowing_date = 17;
+  string harvest_date = 18;
+  int32 total_days = 19;
+  double yield_kg_per_hectare = 20;
+  double ndvi_index = 21;
+  string crop_disease_status = 22;
+}
+
+message GetSelectiveReadingsRequest {
+  repeated string fields = 1;
+  int32 limit = 2;
+}
+
+message SelectiveReadingMessage {
+  string timestamp = 1;
+  double temperature_c = 2;
+  double humidity_percent = 3;
+  double soil_moisture_percent = 4;
+  double soil_ph = 5;
+  double rainfall_mm = 6;
+  double sunlight_hours = 7;
+  double ndvi_index = 8;
+  double yield_kg_per_hectare = 9;
+  string crop_disease_status = 10;
+}
+
+message GetSelectiveReadingsResponse {
+  repeated SelectiveReadingMessage readings = 1;
+}
+
+message GetAnalyticsSummaryRequest {
+  string from = 1;
+  string to = 2;
+  string region = 3;
+  string crop_type = 4;
+}
+
+message AnalyticsSummaryMessage {
+  int64 count = 1;
+  double avg_temperature_c = 2;
+  double avg_humidity_percent = 3;
+  double avg_soil_moisture_percent = 4;
+  double avg_soil_ph = 5;
+  double avg_rainfall_mm = 6;
+  double avg_sunlight_hours = 7;
+  double avg_ndvi_index = 8;
+  double avg_yield_kg_per_hectare = 9;
+  string min_timestamp = 10;
+  string max_timestamp = 11;
+}
+
+message GetAnalyticsByRegionRequest {}
+
+message AnalyticsByRegionMessage {
+  string region = 1;
+  int64 count = 2;
+  double avg_temperature_c = 3;
+  double avg_humidity_percent = 4;
+  double avg_soil_moisture_percent = 5;
+  double avg_ndvi_index = 6;
+  double avg_yield_kg_per_hectare = 7;
+}
+
+message GetAnalyticsByRegionResponse {
+  repeated AnalyticsByRegionMessage regions = 1;
+}

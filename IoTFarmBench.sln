@@ -1,0 +1,42 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{5854FF58-B8C5-05C6-5BF2-ACE42193F22B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grpc-service", "grpc-service", "{CE12FFDB-D387-8612-D42C-CD88A21F2C9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcService", "services\grpc-service\GrpcService.csproj", "{1C1F12FB-A3E6-4151-3B93-C3D1F4199B5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rest-service", "rest-service", "{BE5BF7AE-D581-35DC-7741-55097D5CE8AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestService", "services\rest-service\RestService.csproj", "{D2375617-3807-07FC-0243-06C374344C6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C1F12FB-A3E6-4151-3B93-C3D1F4199B5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C1F12FB-A3E6-4151-3B93-C3D1F4199B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C1F12FB-A3E6-4151-3B93-C3D1F4199B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C1F12FB-A3E6-4151-3B93-C3D1F4199B5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2375617-3807-07FC-0243-06C374344C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2375617-3807-07FC-0243-06C374344C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2375617-3807-07FC-0243-06C374344C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2375617-3807-07FC-0243-06C374344C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE12FFDB-D387-8612-D42C-CD88A21F2C9B} = {5854FF58-B8C5-05C6-5BF2-ACE42193F22B}
+		{1C1F12FB-A3E6-4151-3B93-C3D1F4199B5D} = {CE12FFDB-D387-8612-D42C-CD88A21F2C9B}
+		{BE5BF7AE-D581-35DC-7741-55097D5CE8AB} = {5854FF58-B8C5-05C6-5BF2-ACE42193F22B}
+		{D2375617-3807-07FC-0243-06C374344C6A} = {BE5BF7AE-D581-35DC-7741-55097D5CE8AB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2BA3A1C1-1CC0-4815-B31A-469BBA1728D7}
+	EndGlobalSection
+EndGlobal
